@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meeting Scheduler</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f0f2f5;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .meeting {
+        background: #f9f9f9;
+        padding: 10px;
+        margin-top: 10px;
+        border-left: 5px solid #007bff;
+        border-radius: 5px;
+      }
+
+      .meeting-title {
+        font-weight: bold;
+      }
+
+      .delete-btn {
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin-top: 5px;
+        cursor: pointer;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>📅 Meeting Scheduler</h2>
+      <input type="text" id="title" placeholder="Meeting Title" required />
+      <input type="date" id="date" required />
+      <input type="time" id="time" required />
+      <button onclick="addMeeting()">Add Meeting</button>
+      <h3>Scheduled Meetings</h3>
+      <div id="meetingList"></div>
+    </div>
+
+    <script>
+      const meetingList = document.getElementById("meetingList");
+
+      function addMeeting() {
+        const title = document.getElementById("title").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+
+        if (!title || !date || !time) {
+          alert("Please fill in all fields!");
+          return;
+        }
+
+        const meetingItem = document.createElement("div");
+        meetingItem.className = "meeting";
+        meetingItem.innerHTML = `
+        <div class="meeting-title">${title}</div>
+        <div>${date} at ${time}</div>
+        <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+      `;
+
+        meetingList.appendChild(meetingItem);
+
+        // Clear input fields
+        document.getElementById("title").value = "";
+        document.getElementById("date").value = "";
+        document.getElementById("time").value = "";
+      }
+    </script>
+  </body>
+</html>
